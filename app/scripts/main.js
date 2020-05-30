@@ -76,4 +76,13 @@
   }
 
   // Your custom JavaScript goes here
+
+  const addBaconButton = document.querySelector('#overview ' +
+      'button[type="button"]');
+  if (addBaconButton) {
+    addBaconButton.addEventListener('click', () => {
+      const baconImage = document.querySelector('#overview img');
+      baconImage.parentNode.appendChild(baconImage.cloneNode(false));
+    }, false);
+  }
 })();
