@@ -77,6 +77,7 @@
 
   // Your custom JavaScript goes here
 
+  // clone bacon image feature
   const addBaconButton = document.querySelector('#overview ' +
       'button[type="button"]');
   if (addBaconButton) {
@@ -84,5 +85,77 @@
       const baconImage = document.querySelector('#overview img');
       baconImage.parentNode.appendChild(baconImage.cloneNode(false));
     }, false);
+  }
+
+  // get form fields
+  const fields = {
+    firstName: document.getElementById('firstName'),
+    lastName: document.getElementById('lastName'),
+    email: document.getElementById('email'),
+    country: document.getElementById('country'),
+    postalCode: document.getElementById('postalCode'),
+    phoneNumber: document.getElementById('phoneNumber'),
+    creditCard: document.getElementById('creditCard'),
+    securityCode: document.getElementById('securityCode'),
+    expDate: document.getElementById('expDate'),
+  };
+
+  // set up form input masks
+  new IMask(fields.postalCode, {
+    mask: '00000',
+  });
+  new IMask(fields.phoneNumber, {
+    mask: '(000) 000-00-00',
+  });
+  new IMask(fields.creditCard, {
+    mask: '0000 – 0000 – 0000 – 0000',
+  });
+  new IMask(fields.securityCode, {
+    mask: '000',
+  });
+  new IMask(fields.expDate, {
+    mask: '00 / 00',
+  });
+
+  // submit purchase form handler
+  const submitButton = document.querySelector('#submitPurchase');
+  if (submitButton) {
+    submitButton.addEventListener('click', () => {
+      let isValid = true;
+      const formData = {};
+
+      Object.keys(fields).forEach((key) => {
+        formData[key] = fields[key].value;
+
+        if (fields[key].parentNode.classList.contains('is-invalid')) {
+          isValid = false;
+        } else if (formData[key].length === 0) {
+          fields[key].parentNode.classList.add('is-invalid');
+        } else if (key === 'expDate') {
+          const dateSplitted = formData[key].split(' / ');
+          const month = +dateSplitted[0] - 1;
+          if (month < 0 || month > 12 ) {
+            fields[key].parentNode.classList.add('is-invalid');
+            isValid = false;
+          } else {
+            const year = +`20${dateSplitted[1]}`;
+            const expiryDate = new Date(year, month);
+            const today = new Date();
+            if (expiryDate < today) {
+              fields[key].parentNode.classList.add('is-invalid');
+              isValid = false;
+            }
+          }
+        }
+      });
+
+      if (isValid) {
+        const formDataString = JSON.stringify(formData);
+        console.log(formDataString);
+        // send request
+
+        document.querySelector('.form-success').showModal();
+      }
+    });
   }
 })();

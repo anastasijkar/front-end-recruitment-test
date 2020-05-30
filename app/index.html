@@ -55,6 +55,17 @@
 
   </head>
   <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <dialog class="mdl-dialog form-success">
+      <h5 class="mdl-dialog__title">Purchase successful <i class="material-icons" role="presentation">check</i></h5>
+      <div class="mdl-dialog__content">
+        <p>
+          Thank You for the order! Check your mailbox for the confirmation.
+        </p>
+      </div>
+      <div class="mdl-dialog__actions">
+        <a role="button" href="/" class="mdl-button">Back to homepage</a>
+      </div>
+    </dialog>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
@@ -65,12 +76,12 @@
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-          <a href="#overview" class="mdl-layout__tab">Overview</a>
+          <a href="#overview" class="mdl-layout__tab is-active">Overview</a>
           <a href="#features" class="mdl-layout__tab">Features</a>
           <a href="#features" class="mdl-layout__tab">Details</a>
           <a href="#features" class="mdl-layout__tab">Technology</a>
           <a href="#features" class="mdl-layout__tab">FAQ</a>
-          <a href="#checkout" class="mdl-layout__tab is-active">Checkout</a>
+          <a href="#checkout" class="mdl-layout__tab">Checkout</a>
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
             <i class="material-icons" role="presentation">add</i>
             <span class="visuallyhidden">Add</span>
@@ -78,7 +89,7 @@
         </div>
       </header>
       <main class="mdl-layout__content">
-        <div class="mdl-layout__tab-panel" id="overview">
+        <div class="mdl-layout__tab-panel is-active" id="overview">
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
               <i class="material-icons">play_circle_filled</i>
@@ -231,7 +242,7 @@
             </div>
           </section>
         </div>
-        <div class="mdl-layout__tab-panel is-active" id="checkout">
+        <div class="mdl-layout__tab-panel" id="checkout">
           <section class="section--center mdl-grid mdl-grid--no-spacing">
             <div class="mdl-cell mdl-cell--12-col">
               <h4>Checkout</h4>
@@ -239,50 +250,73 @@
             <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
               <form action="#">
                 <h5 data-nr="1" id="checkout_personalInfo">Personal information</h5>
+
                 <div class="fieldset" role="group" aria-labelledby="checkout_personalInfo">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="firstName" placeholder="Elon">
                     <label class="mdl-textfield__label" for="firstName">First Name</label>
                   </div>
+
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="lastName" placeholder="Musk">
                     <label class="mdl-textfield__label" for="lastName">Last Name</label>
                   </div>
+
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield--fullwidth">
-                    <input class="mdl-textfield__input" type="email" id="email" placeholder="elon@spacex.com">
+                    <input class="mdl-textfield__input" type="email" id="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="elon@spacex.com">
                     <label class="mdl-textfield__label" for="email">Email</label>
+                    <span class="mdl-textfield__error">Please enter a valid email</span>
                   </div>
+
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                    <input type="text" value="" class="mdl-textfield__input" id="country" readonly>
+                    <input type="hidden" value="" name="country">
+                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                    <label for="country" class="mdl-textfield__label">Country</label>
+                    <ul for="country" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                      <li class="mdl-menu__item" data-val="US" data-selected="true">United States</li>
+                      <li class="mdl-menu__item" data-val="UK">United Kingdom</li>
+                      <li class="mdl-menu__item" data-val="PL">Poland</li>
+                      <li class="mdl-menu__item" data-val="NL">Netherlands</li>
+                    </ul>
+                </div>
+
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="country" placeholder="United States">
-                    <label class="mdl-textfield__label" for="country">Country</label>
+                    <input class="mdl-textfield__input" type="text" id="postalCode" placeholder="10001" pattern="^[0-9]{5}$">
+                    <label class="mdl-textfield__label" for="postalCode">Postal Code</label>
+                    <span class="mdl-textfield__error">Should consist of 5 digits</span>
                   </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="postalCode" placeholder="10001">
-                    <label class="mdl-textfield__label" for="country">Postal Code</label>
-                  </div>
+
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield--fullwidth">
-                    <input class="mdl-textfield__input" type="text" id="phoneNumber" placeholder="(212) 692-93-93">
+                    <input class="mdl-textfield__input" type="text" id="phoneNumber" placeholder="(212) 692-93-93" pattern="^\([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$">
                     <label class="mdl-textfield__label" for="phoneNumber">Phone Number</label>
+                    <span class="mdl-textfield__error">Please enter a valid phone number</span>
                   </div>
                 </div>
 
                 <h5 data-nr="2" id="checkout_payDetails"> Payment details <i class="material-icons">lock</i></h5>
+
                 <div class="fieldset" role="group" aria-labelledby="checkout_payDetails">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield--fullwidth mdl-textfield--credit-card">
-                    <input class="mdl-textfield__input" type="text" id="creditCard" placeholder="0000 – 0000 – 0000 – 0000">
+                    <input class="mdl-textfield__input" type="text" id="creditCard" placeholder="0000 – 0000 – 0000 – 0000" pattern="^[0-9]{4} – [0-9]{4} – [0-9]{4} – [0-9]{4}$">
                     <label class="mdl-textfield__label" for="creditCard">Credit Card Number</label>
+                    <span class="mdl-textfield__error">Please enter a valid credit card</span>
                   </div>
+
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="securityCode" placeholder="***">
+                    <input class="mdl-textfield__input" type="password" id="securityCode" placeholder="***" pattern="^[0-9]{3}$">
                     <label class="mdl-textfield__label" for="securityCode">Security Code</label>
+                    <span class="mdl-textfield__error">Please enter a valid security code</span>
                     <span id="securityTooltip">?</span>
                     <div class="mdl-tooltip" data-mdl-for="securityTooltip">
                       3 digits, on the back of the card
                     </div>
                   </div>
+
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="expDate" placeholder="MM / YY">
+                    <input class="mdl-textfield__input" type="text" id="expDate" placeholder="MM / YY" pattern="^[0-9]{2} \/ [0-9]{2}$">
                     <label class="mdl-textfield__label" for="expDate">Expiration Date</label>
+                    <span class="mdl-textfield__error">Please enter a valid expiration date</span>
                   </div>
                 </div>
               </form>
@@ -323,7 +357,7 @@
             </div>
 
             <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--button-container">
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitPurchase">
                 <i class="material-icons">shopping_cart</i> Complete Purchase
               </button>
             </div>
@@ -386,6 +420,8 @@
     </div>
 
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/getmdl-select@2.0.1/getmdl-select.min.js"></script>
+    <script src="https://unpkg.com/imask"></script>
     <!-- build:js scripts/main.min.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->

@@ -70,13 +70,21 @@
         cursor: pointer;
       }
     }
+
+    .getmdl-select {
+      i {
+        position: absolute;
+        margin-top: -1.5em;
+        margin-left: calc(100% - 1.5em);
+      }
+    }
   }
 
   .mdl-card {
     margin-left: 3em;
     padding: .5em;
     @media (max-width: 839px) {
-      margin-left: 0;
+      margin: 1.5em 0 1em;
       width: 100%;
     }
 
